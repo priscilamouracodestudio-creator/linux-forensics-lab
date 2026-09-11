@@ -1,0 +1,132 @@
+=======================================================================
+RELATÓRIO DE INCIDENTE - OPERATION BLACK TERMINAL
+=======================================================================
+Analista: Priscila Moura
+Data: 10/10/2026
+Status: Em Andamento
+
+
+1. IDENTIFICAÇÃO DO SISTEMA (MISSÃO 01)
+-----------------------------------------------------------------------
+- Usuário logado: kali
+- Diretório de Trabalho: /home/kali/black_terminal
+- Sistema Operacional: Kali GNU/Linux
+
+NAME="Kali GNU/Linux"
+VERSION_ID="2026.3"
+VERSION="2026.3"
+VERSION_CODENAME=kali-rolling
+ID=kali
+ID_LIKE=debian
+HOME_URL="https://www.kali.org/"
+SUPPORT_URL="https://forums.kali.org/"
+BUG_REPORT_URL="https://bugs.kali.org/"
+ANSI_COLOR="1;31"
+
+
+2. EXPLORANDO O AMBIENTE - MISSÃO 02
+----------------------------------------------------------------------
+┌──(kali㉿kali)-[~/black_terminal]
+└─$ tree           
+.
+├── backup
+│   └── evidence.zip
+├── hidden
+├── intel
+│   └── readme.txt
+├── logs
+│   └── auth.log
+├── network
+├── relatorio.txt
+└── scripts
+    └── dark.sh
+
+7 directories, 5 files
+
+
+3. PRIMEIRA FLAG - MISSÃO 03
+-----------------------------------------------------------------------
+ readme.txt
+BLACK TERMINAL SECURITY
+Analista,
+Encontramos atividades suspeitas.
+O usuário responsável pode estar escondido nos logs.
+FLAG{investigation_started}
+
+- FLAG 01: {investigation_started}
+
+
+4. INVESTIGAÇÃO DE LOGS - MISSÃO 04
+-----------------------------------------------------------------------
+
+May 11 10:25:33 kali sshd[2211]: Accepted password for phantom from 10.10.10.45
+May 11 10:26:01 kali sudo: phantom executed dark.sh
+FLAG {phantom_user_found}
+May 11 10:25:33 kali sshd[2211]: Accepted password for phantom from 10.10.10.45
+
+
+FLAG 02: {phantom_user_found}
+
+
+5. ARQUIVOS OCULTOS - MISSÃO 05
+-----------------------------------------------------------------------
+
+FLAG{hidden_file_discovered}
+IP: 10.10.10.45
+
+drwxrwxr-x 2 kali kali 4096 Sep 10 10:40 .
+drwxrwxr-x 8 kali kali 4096 Sep 10 12:44 ..
+-rw-rw-r-- 1 kali kali   45 Sep 10 10:40 .ghost
+
+                  
+FLAG 03: {hidden_file_discovered}
+
+
+6. INVESTIGAÇÃO DE PROCESSOS - MISSÃO 06
+-----------------------------------------------------------------------
+
+kali       24040  0.0  0.1   5624  2244 pts/0    SN   12:13   0:00 sleep 5000
+kali       51382  0.0  0.1   6552  2388 pts/3    S+   13:07   0:00 grep --color=auto sleep
+kali       51545  0.0  0.1   6552  2392 pts/3    S+   13:07   0:00 grep --color=auto yes
+
+
+7. INVESTIGAÇÃO DE SCRIPT - MISSÃO 07
+-----------------------------------------------------------------------
+ 
+total 4
+-rwxrwxr-x 1 kali kali 94 Sep 10 10:18 dark.sh
+
+cat dark.sh  
+#!/bin/bash
+echo "Conexão estabelecida"
+echo "Extraindo dados..."
+echo "Persistência ativa"
+
+./dark.sh
+Conexão estabelecida
+Extraindo dados...
+Persistência ativa
+
+
+8. REDE - MISSÃO 08
+-----------------------------------------------------------------------
+
+- Porta Aberta: 4444/TCP 
+- Endereço: 0.0.0.0:4444
+- Estado: LISTEN
+- Processo Suspeito: nc (NetCat)
+- PID do Processo: 24162
+
+
+9. RESUMO DO RELATÓRIO
+-----------------------------------------------------------------------
+
+- Usuário Suspeito: phantom
+- IP Suspeito: 10.10.10.45
+- Processo Estranho: sleep 5000 (PID 24040)
+- Script Ssupeito: dark.sh
+- Porta Aberta: 4444/TCP
+- Arquivo oculto: .ghost 
+
+
+FLAG FINAL: {linux_investigator_completed}

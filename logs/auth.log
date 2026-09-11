@@ -1,0 +1,5 @@
+May 11 10:21:02 kali sshd[2211]: Failed password for admin from 192.168.0.22
+May 11 10:22:10 kali sshd[2211]: Failed password for root from 192.168.0.22
+May 11 10:25:33 kali sshd[2211]: Accepted password for phantom from 10.10.10.45
+May 11 10:26:01 kali sudo: phantom executed dark.sh
+FLAG {phantom_user_found}
