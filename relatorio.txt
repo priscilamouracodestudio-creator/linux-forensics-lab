@@ -124,7 +124,7 @@ Persistência ativa
 - Usuário Suspeito: phantom
 - IP Suspeito: 10.10.10.45
 - Processo Estranho: sleep 5000 (PID 24040)
-- Script Ssupeito: dark.sh
+- Script Suspeito: dark.sh
 - Porta Aberta: 4444/TCP
 - Arquivo oculto: .ghost 
 
